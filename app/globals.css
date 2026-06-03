@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050709;
+  --foreground: #f7fbff;
 }
 
 @theme inline {
@@ -12,15 +12,266 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
+  min-height: 100dvh;
+  overflow: hidden;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hotspot-point {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+}
+
+.hotspot-dot,
+.hotspot-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.hotspot-dot {
+  width: 13px;
+  height: 13px;
+  background: #e6fbff;
+  border: 2px solid #071014;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.78), 0 0 20px rgba(34, 211, 238, 0.72);
+}
+
+.hotspot-pulse {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(165, 243, 252, 0.76);
+  background: rgba(34, 211, 238, 0.13);
+  animation: hotspot-ping 1.8s ease-out infinite;
+}
+
+.falling-leaves .leaf {
+  position: absolute;
+  top: -10%;
+  display: block;
+  border-radius: 70% 0 70% 0;
+  background: rgba(214, 151, 58, 0.72);
+  box-shadow: 0 0 10px rgba(245, 190, 95, 0.22);
+  transform: translate3d(0, 0, 0) rotate(18deg);
+  animation: leaf-fall linear infinite;
+}
+
+.falling-leaves .leaf-gust {
+  top: 18%;
+  background: rgba(238, 174, 74, 0.78);
+  animation-name: leaf-gust;
+}
+
+.bird {
+  position: absolute;
+  width: 58px;
+  height: 30px;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) scale(var(--bird-scale));
+  animation: bird-cross linear infinite;
+  filter: drop-shadow(0 0 2px rgba(245, 255, 245, 0.75)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.62));
+}
+
+.bird-body {
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  width: 8px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(2, 8, 10, 0.92);
+  transform: translateX(-50%);
+}
+
+.bird-wing {
+  position: absolute;
+  top: 14px;
+  width: 30px;
+  height: 12px;
+  border-top: 5px solid rgba(2, 8, 10, 0.94);
+  border-radius: 999px 999px 0 0;
+  transform-origin: right center;
+  animation: bird-flap 0.58s ease-in-out infinite alternate;
+}
+
+.bird-wing-left {
+  left: 2px;
+  transform: rotate(18deg);
+}
+
+.bird-wing-right {
+  right: 2px;
+  transform: scaleX(-1) rotate(18deg);
+}
+
+.ambient-overlay {
+  background:
+    radial-gradient(circle at 46% 42%, rgba(255, 214, 128, 0.1), transparent 32%),
+    linear-gradient(180deg, rgba(255, 185, 95, 0.05), rgba(7, 10, 14, 0.12)),
+    radial-gradient(circle at center, transparent 46%, rgba(0, 0, 0, 0.32) 100%);
+  mix-blend-mode: soft-light;
+}
+
+.ambient-overlay.iglesia {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 222, 160, 0.13), transparent 30%),
+    linear-gradient(180deg, rgba(255, 185, 95, 0.07), rgba(5, 7, 9, 0.18)),
+    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+@keyframes hotspot-ping {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.58);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.45);
+  }
+}
+
+@keyframes leaf-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.78;
+  }
+  54% {
+    opacity: 0.64;
+    transform: translate3d(-16vw, 48vh, 0) rotate(150deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-34vw, 112vh, 0) rotate(330deg);
+  }
+}
+
+@keyframes leaf-gust {
+  0% {
+    opacity: 0;
+    transform: translate3d(18vw, -8vh, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.86;
+  }
+  78% {
+    opacity: 0.76;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-55vw, 54vh, 0) rotate(520deg);
+  }
+}
+
+@keyframes bird-cross {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(var(--bird-scale));
+  }
+  12% {
+    opacity: 0.9;
+  }
+  82% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(62vw, -15vh, 0) scale(var(--bird-scale));
+  }
+}
+
+@keyframes bird-flap {
+  0% { top: 8px; }
+  100% { top: 3px; }
+}
+
+
+
+@media (max-width: 640px) {
+  .hotspot-dot {
+    width: 15px;
+    height: 15px;
+  }
+
+  .hotspot-pulse {
+    width: 34px;
+    height: 34px;
+  }
+
+  .bird {
+    width: 42px;
+    height: 24px;
+  }
+
+  .bird-body {
+    top: 12px;
+    width: 6px;
+    height: 4px;
+  }
+
+  .bird-wing {
+    top: 12px;
+    width: 22px;
+    height: 9px;
+    border-top-width: 4px;
+  }
+
+  .falling-leaves .leaf {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot-pulse,
+  .falling-leaves .leaf,
+  .bird,
+  .bird-wing {
+    animation: none;
+  }
+
+  .falling-leaves,
+  .bird-flock {
+    display: none;
+  }
+}
+
+.typewriter-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.65em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: -0.12em;
+  background: rgba(207, 250, 254, 0.86);
+  animation: caret-blink 0.82s steps(2, end) infinite;
+}
+
+@keyframes caret-blink {
+  0%, 45% {
+    opacity: 1;
+  }
+  46%, 100% {
+    opacity: 0;
+  }
 }
