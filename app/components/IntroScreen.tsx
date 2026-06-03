@@ -6,7 +6,7 @@ type IntroScreenProps = {
 
 export function IntroScreen({ onStart }: IntroScreenProps) {
   return (
-    <section className="relative min-h-dvh overflow-hidden bg-[#050709] text-white">
+    <section className="digital-experience-root relative min-h-dvh overflow-hidden bg-[#050709] text-white">
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,12,0.2),rgba(4,7,10,0.86)),radial-gradient(circle_at_50%_28%,rgba(95,178,189,0.18),transparent_34%),radial-gradient(circle_at_50%_88%,rgba(214,151,58,0.18),transparent_38%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/40 to-transparent" />
       <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:42px_42px]" />

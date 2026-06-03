@@ -1,10 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChurchScene } from "./ChurchScene";
+import { getLocation } from "../data/locations";
+import { LocationScene } from "./LocationScene";
 
 export function ChurchRouteScene() {
   const router = useRouter();
+  const location = getLocation("iglesia");
 
-  return <ChurchScene isLeaving={false} onBack={() => router.push("/")} />;
+  if (!location) {
+    return null;
+  }
+
+  return <LocationScene location={location} isLeaving={false} onBack={() => router.push("/")} />;
 }
